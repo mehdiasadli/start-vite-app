@@ -10,11 +10,14 @@ export default function Navigator() {
       {/* PUBLIC PAGES */}
       <Route path='/' element={<LandingPage />} />
       {/* PRIVATE PAGES */}
-      <Route path='/user' element={isAuthenticated ? <PrivateLayout /> : <Navigate to='/auth' />}>
+      <Route
+        path='/profile'
+        element={isAuthenticated ? <PrivateLayout /> : <Navigate to='/auth' />}
+      >
         <Route index element={<ProfilePage />} />
       </Route>
       {/* AUTH PAGES (only for non-Authenticated) */}
-      <Route path='/auth' element={!isAuthenticated ? <AuthLayout /> : <Navigate to='/user' />}>
+      <Route path='/auth' element={!isAuthenticated ? <AuthLayout /> : <Navigate to='/profile' />}>
         <Route index element={<LoginPage />} />
       </Route>
     </Routes>

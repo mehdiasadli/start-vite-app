@@ -1,3 +1,4 @@
 export { default as LandingPage } from './LandingPage';
-export { default as LoginPage } from './LoginPage';
-export { default as ProfilePage } from './ProfilePage';
+export { default as VotingPage } from './VotingPage';
+export { default as CategoriesPage } from './CategoriesPage';
+export { default as Dashboard } from './Dashboard';

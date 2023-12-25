@@ -1,24 +1,30 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AuthLayout, PrivateLayout } from '../components';
-import { LandingPage, LoginPage, ProfilePage } from '../pages';
+import { CategoriesPage, Dashboard, LandingPage, VotingPage } from '../pages';
+import { AuthLayout, Layout } from '../components';
+import { useAuth } from '../store/auth.store';
 
 export default function Navigator() {
-  const isAuthenticated = false; // TODO: isAuthenticated logic has to be implemented
+  const { token, user } = useAuth();
 
   return (
     <Routes>
-      {/* PUBLIC PAGES */}
-      <Route path='/' element={<LandingPage />} />
-      {/* PRIVATE PAGES */}
-      <Route
-        path='/profile'
-        element={isAuthenticated ? <PrivateLayout /> : <Navigate to='/auth' />}
-      >
-        <Route index element={<ProfilePage />} />
+      {/* PUBLIC ROUTES */}
+      <Route path='/' element={!token ? <AuthLayout /> : <Navigate to='/categories' />}>
+        <Route index element={<LandingPage />} />
       </Route>
-      {/* AUTH PAGES (only for non-Authenticated) */}
-      <Route path='/auth' element={!isAuthenticated ? <AuthLayout /> : <Navigate to='/profile' />}>
-        <Route index element={<LoginPage />} />
+      {/* PRIVATE ROUTES */}
+      <Route path='/categories' element={token ? <Layout /> : <Navigate to='/' />}>
+        <Route index element={<CategoriesPage />} />
+        <Route path=':id' element={<VotingPage />} />
+      </Route>
+      {/* ADMIN ROUTES */}
+      <Route
+        path='/dashboard'
+        element={
+          token && user?.isAdmin ? <Layout /> : <Navigate to={token ? '/categories' : '/'} />
+        }
+      >
+        <Route index element={<Dashboard />} />
       </Route>
     </Routes>
   );

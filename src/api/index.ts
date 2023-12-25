@@ -40,7 +40,7 @@ function interceptor(
   config: InternalAxiosRequestConfig<any>
 ): InternalAxiosRequestConfig<any> | Promise<InternalAxiosRequestConfig<any>> {
   const storage = webStorage.get<{ state: { token: string } }>(STORAGE_KEYS.USER_DATA);
-  const token = storage?.state?.token || null; // TODO: implement getting token from storage
+  const token = storage?.state?.token || null;
 
   if (!token) return config;
 

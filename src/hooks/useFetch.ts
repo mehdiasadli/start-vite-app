@@ -15,7 +15,7 @@ export const useFetch = <
 >(
   key: TQueryKey,
   fn: QueryFunction<TQueryFnData, TQueryKey, never>,
-  options: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<TData, TError> => {
   return useQuery<TQueryFnData, TError, TData, TQueryKey>({
     retry: false,

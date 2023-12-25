@@ -2,5 +2,5 @@ import { MantineThemeOverride } from '@mantine/core';
 
 export default {
   cursorType: 'pointer',
-  defaultRadius: 'xs',
+  defaultRadius: 'lg',
 } as MantineThemeOverride;
